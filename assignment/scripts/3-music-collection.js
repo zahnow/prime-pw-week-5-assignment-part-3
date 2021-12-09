@@ -22,6 +22,10 @@ function showCollection (arr) {
     }
 }
 
+function findByArtist (artist) {
+    return collection.filter(album => album.artist === artist);
+}
+
 console.log('--- TESTS ---');
 console.log(`Empty collection:`, collection);
 console.log(`Adding a bunch of albums:`, bulkAddToCollection([{title: 'OK Computer', artist: 'Radiohead', yearPublished: 1997}, 
@@ -34,3 +38,6 @@ console.log(`Adding a bunch of albums:`, bulkAddToCollection([{title: 'OK Comput
                                                               {title: 'Weird Era Cont', artist: 'Deerhunter', yearPublished: 2008}]));
 console.log(`Collection should contain albums now:`, collection);
 console.log(`Testing showCollection`, showCollection(collection));
+console.log(`Testing findByArtist on an artist not in collection`, findByArtist('Elvis'));
+console.log(`Testing findByArtist on an artist with one album in collection`, findByArtist('Tame Impala'));
+console.log(`Testing findByArtist on an artist with multiple albums in collection`, findByArtist('Radiohead'));

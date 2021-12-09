@@ -8,9 +8,17 @@ function addToCollection (title, artist, yearPublished) {
     return album;
 }
 
+// Not technically part of the requirements, but seems like this might make things cleaner later.
 function bulkAddToCollection (arr) {
     for (album of arr) {
         addToCollection(album.title, album.artist, album.yearPublished);
+    }
+}
+
+function showCollection (arr) {
+    console.log(`Albums:`, arr.length);
+    for (album of arr) {
+        console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}`);
     }
 }
 
@@ -25,3 +33,4 @@ console.log(`Adding a bunch of albums:`, bulkAddToCollection([{title: 'OK Comput
                                                               {title: 'Microcastle', artist: 'Deerhunter', yearPublished: 2008},
                                                               {title: 'Weird Era Cont', artist: 'Deerhunter', yearPublished: 2008}]));
 console.log(`Collection should contain albums now:`, collection);
+console.log(`Testing showCollection`, showCollection(collection));

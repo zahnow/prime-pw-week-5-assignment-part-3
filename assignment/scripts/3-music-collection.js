@@ -28,19 +28,23 @@ function findByArtist (artist) {
 
 function search (criteria) {
     const returnArr = [];
-    //This is gonna be gross looking but I can't come up with a better alternative at the moment
     for (const album of collection) {
-        let match = true;
-        for (const property in criteria) {
-            if (album[property] !== criteria[property]) {
-                match = false;
-            }
-        }
-        if (match) {
+        if (isMatch(criteria, album)) {
             returnArr.push(album);
         }
     }
     return returnArr;
+}
+
+// This seems like a horrible name
+function isMatch (criteria, candidate) {
+    let match = true;
+    for (const property in criteria) {
+        if (candidate[property] !== criteria[property]) {
+            match = false;
+        }
+    }
+    return match;
 }
 
 console.log('--- TESTS ---');
@@ -58,7 +62,7 @@ console.log(`Testing showCollection`, showCollection(collection));
 console.log(`Testing findByArtist on an artist not in collection`, findByArtist('Elvis'));
 console.log(`Testing findByArtist on an artist with one album in collection`, findByArtist('Tame Impala'));
 console.log(`Testing findByArtist on an artist with multiple albums in collection`, findByArtist('Radiohead'));
-//console.log(`Testing search with no search object, should return all albums`, search());  //This one breaks things
+console.log(`Testing search with no search object, should return all albums`, search());
 console.log(`Testing search with an exact match: return one album`, search({title: 'Weird Era Cont', artist: 'Deerhunter', yearPublished: 2008}))
 console.log(`Testing empty search, should return all albums`, search({}));
 console.log(`Testing search not matching anything in library - return []`, search({album: 'asdf', artist: 'zxcv'}));

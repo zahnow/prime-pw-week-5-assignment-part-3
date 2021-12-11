@@ -25,7 +25,7 @@ function showCollection (arr) {
 
 function showTracks (tracks) {
     for (let i = 0; i < tracks.length; i++) {
-        console.log(`${i}. ${tracks[i].name}: ${tracks[i].duration}`);
+        console.log(`\t${i}. ${tracks[i].name}: ${tracks[i].duration}`);
     }
 }
 
@@ -43,12 +43,12 @@ function search (criteria) {
     return results;
 }
 
-// Alright, this is getting less elegant with each commit. 
+// Alright, track match really made this matching function less elegant. 
 // This used to be isMatch, I'm renaming this to albumMatch and will give the weird recursive version a try later
 function albumMatch (criteria, candidate) {
     let match = true;
     for (const property in criteria) {
-        if (property === 'trackName') {
+        if (property === 'trackName') {             // Really hate this one-off...
             if (!trackMatch(criteria[property], candidate.tracks)) {
                 match = false;
             }
@@ -61,6 +61,7 @@ function albumMatch (criteria, candidate) {
 }
 
 // This is the fallback option in case the recursive thing gets too confusing.
+// Update- it got too confusing. Going from a logical AND search to a logical OR made the thing way uglier than just having this one-off function.
 function trackMatch (track, trackList) {
     let isMatch = false;
     for (const candidate of trackList) {

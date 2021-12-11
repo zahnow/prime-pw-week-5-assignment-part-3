@@ -10,9 +10,11 @@ function addToCollection (title, artist, yearPublished, tracks) {
 
 // Not technically part of the requirements, but seems like this might make things cleaner later.
 function bulkAddToCollection (arr) {
+    const addedItems = [];
     for (const album of arr) {
-        addToCollection(album.title, album.artist, album.yearPublished, album.tracks);
+        addedItems.push(addToCollection(album.title, album.artist, album.yearPublished, album.tracks));
     }
+    return addedItems;
 }
 
 function showCollection (arr) {
